@@ -4,8 +4,8 @@ FastApi
 pre-requisite: install python 3.10 
 Then following steps
 
-1. git clone <repo url>
-2. cd <repo>
+1. git clone https://github.com/SurajHashedin/PythonAssignment.git
+2. cd PythonAssignment
 3. git pull origin main
 4. source venv/Scripts/activate
 
