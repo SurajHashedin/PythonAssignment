@@ -24,6 +24,7 @@ async def create_metrics(datatracker: DataTracker):
     db.append(datatracker)
     return {'id': datatracker.id}
 
+#delete matrics based on user
 @app.delete("/api/v1/metrics/{username}")
 async def delete_username(username:str):
     for data in db:
@@ -35,6 +36,7 @@ async def delete_username(username:str):
         detail = f"{username} is deleted"
     )
 
+#update matrics based on username
 @app.put("/api/v1/metrics/{data}")
 async def update_data(data_update: updateDataTracker, data:str):
     for dt in db:
@@ -54,3 +56,11 @@ async def update_data(data_update: updateDataTracker, data:str):
         status_code = 404,
         detail = f"{data} is deleted"
     )
+
+
+#health check api
+@app.get("/api/v1/healthcheck")
+async def get():
+    if db:
+        return "success"
+    return "failed" 
