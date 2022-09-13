@@ -4,22 +4,11 @@ from typing import List
 from uuid import uuid4
 from fastapi import FastAPI
 from models import DataTracker,updateDataTracker
-
+from data import db
 # create an app object
 app = FastAPI()
 
-# updated dummy data
-db: List[DataTracker] = [ \
-    DataTracker( \
-    id = uuid4(), \
-    username = 'test', \
-    key = 'keytest', \
-    value = 'valuetest', \
-    datatype = 'datatypetest', \
-    tags = 'tagstest', \
-    createdAt = datetime.now(), \
-    updatedAt = datetime.now()
- )]
+
 
 
 #fetching all metrics records 
@@ -35,7 +24,6 @@ async def create_metrics(datatracker: DataTracker):
     db.append(datatracker)
     return {'id': datatracker.id}
 
-#delete metrics records 
 @app.delete("/api/v1/metrics/{username}")
 async def delete_username(username:str):
     for data in db:
@@ -47,7 +35,6 @@ async def delete_username(username:str):
         detail = f"{username} is deleted"
     )
 
-#update metrics records 
 @app.put("/api/v1/metrics/{data}")
 async def update_data(data_update: updateDataTracker, data:str):
     for dt in db:
